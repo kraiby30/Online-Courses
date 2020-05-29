@@ -9,6 +9,6 @@ int main() {
     int b = 0;
     std::cin >> a;
     std::cin >> b;
-    std::cout << sum_of_two_digits(a, b);
+    std::cout << "Sum = "<<sum_of_two_digits(a, b)<<std::endl;
     return 0;
 }
