@@ -60,5 +60,8 @@ int fibonacci_sum_squares_fast(long long n)
 int main() {
     long long n = 0;
     std::cin >> n;
-    std::cout << fibonacci_sum_squares_fast(n);
+    int answer = fibonacci_sum_squares_fast(n);
+    if(answer>=10) 
+    answer = answer%10;
+    std::cout << answer;
 }
