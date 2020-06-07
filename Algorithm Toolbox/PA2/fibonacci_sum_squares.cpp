@@ -36,10 +36,12 @@ int fibonacci_sum_squares_fast(long long n)
     long long N = (n+1)%60;
     std::vector<int> fiboLastDigit(60);
     fiboLastDigit[1]=1;
+
     for(int i =2;i<=max(n,N); i++)
     {
         fiboLastDigit[i] = (fiboLastDigit[i-1] + fiboLastDigit[i-2]) % 10;
     }
+
     if(n%2==0)
         return ((fiboLastDigit[N]*fiboLastDigit[N]-fiboLastDigit[n]*fiboLastDigit[n]-1)%10+10)%10;
                //%10 to get -9 to 9, +10 to give negative numbers a digit to borrow, %10 to get 0 to 9
@@ -51,8 +53,5 @@ int fibonacci_sum_squares_fast(long long n)
 int main() {
     long long n = 0;
     std::cin >> n;
-    int answer = fibonacci_sum_squares_fast(n);
-    //if(answer>=10) 
-    //answer = answer%10;
-    std::cout << answer;
+    std::cout << fibonacci_sum_squares_fast(n);
 }
