@@ -26,11 +26,13 @@ int max(int a, int b){
 }
 
 /* sum of fibonacci squares, fiboSumSquares(x) is 
-the difference between fibonacci(x+1)^2 and fibonacci(x)^2
+(fibonacci(x+1)^2 - fibonacci(x)^2 +/- 1) . + if x is odd
+and - if x is even.
 */
 int fibonacci_sum_squares_fast(long long n) 
 {
     n = n%60;
+    int result;
     long long N = (n+1)%60;
     std::vector<int> fiboLastDigit(60);
     fiboLastDigit[1]=1;
@@ -38,22 +40,14 @@ int fibonacci_sum_squares_fast(long long n)
     {
         fiboLastDigit[i] = (fiboLastDigit[i-1] + fiboLastDigit[i-2]) % 10;
     }
-    if(n%2 == 0)
-    {
-        if((fiboLastDigit[N]*fiboLastDigit[N]-fiboLastDigit[n]*fiboLastDigit[n])%10-1<0)
-            return (fiboLastDigit[N]*fiboLastDigit[N]-fiboLastDigit[n]*fiboLastDigit[n]-1)%10+10;
-        else
-            return (fiboLastDigit[N]*fiboLastDigit[N]-fiboLastDigit[n]*fiboLastDigit[n]-1)%10 ;     
-    }
+    if(n%2==0)
+        result = (fiboLastDigit[N]*fiboLastDigit[N]-fiboLastDigit[n]*fiboLastDigit[n]-1)%10;
     else
-    {
-        if((fiboLastDigit[N]*fiboLastDigit[N]-fiboLastDigit[n]*fiboLastDigit[n])%10+1<0)
-            return (fiboLastDigit[N]*fiboLastDigit[N]-fiboLastDigit[n]*fiboLastDigit[n]+1)%10+10;
-        else
-            return (fiboLastDigit[N]*fiboLastDigit[N]-fiboLastDigit[n]*fiboLastDigit[n]+1)%10; 
-    }
-
-    
+        result = (fiboLastDigit[N]*fiboLastDigit[N]-fiboLastDigit[n]*fiboLastDigit[n]+1)%10;
+    if(result<0)
+        return result + 10;
+    else 
+        return result;
 }
 
 
@@ -61,7 +55,7 @@ int main() {
     long long n = 0;
     std::cin >> n;
     int answer = fibonacci_sum_squares_fast(n);
-    if(answer>=10) 
-    answer = answer%10;
+    //if(answer>=10) 
+    //answer = answer%10;
     std::cout << answer;
 }
