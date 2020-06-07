@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <math.h>
+#include <cstdlib>
 
 int fibonacci_sum_squares_naive(long long n) {
     if (n <= 1)
@@ -41,13 +41,10 @@ int fibonacci_sum_squares_fast(long long n)
         fiboLastDigit[i] = (fiboLastDigit[i-1] + fiboLastDigit[i-2]) % 10;
     }
     if(n%2==0)
-        result = (fiboLastDigit[N]*fiboLastDigit[N]-fiboLastDigit[n]*fiboLastDigit[n]-1)%10;
+        return ((fiboLastDigit[N]*fiboLastDigit[N]-fiboLastDigit[n]*fiboLastDigit[n]-1)%10+10)%10;
+               //%10 to get -9 to 9, +10 to give negative numbers a digit to borrow, %10 to get 0 to 9
     else
-        result = (fiboLastDigit[N]*fiboLastDigit[N]-fiboLastDigit[n]*fiboLastDigit[n]+1)%10;
-    if(result<0)
-        return result + 10;
-    else 
-        return result;
+        return ((fiboLastDigit[N]*fiboLastDigit[N]-fiboLastDigit[n]*fiboLastDigit[n]+1)%10+10)%10;git
 }
 
 
