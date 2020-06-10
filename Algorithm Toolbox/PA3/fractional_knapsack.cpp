@@ -19,6 +19,12 @@ int getIndex(vector<int> weights,vector<int> values){
   return maxIndex;
 }
 
+/*
+The bag is first filled with the item with highest value concentration.
+Entire item is used if bag capacity is available, or a fraction of the 
+item is used. When one item is over, the next available item with 
+highest value concentration is chosen the problem is repeated.
+*/
 double get_optimal_value(int capacity, vector<int> weights, vector<int> values) {
   double a,value = 0.0;
   int maxIndex;
